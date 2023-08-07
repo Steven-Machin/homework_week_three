@@ -8,26 +8,27 @@ var numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
 var specialCharacters = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ')',];
 
 
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
 
 
 function generatePassword() {
-  console.log("Start your Password!")
+  var correctPrompts = prompts();
   var password = "";
+
+  if (correctPrompts === false) { return; }
+
   for (var i = 0; i < passwordLength; i++) {
-    var randomLetter = Math.floor(Math.random() * choiceArr.length);
-    password = password + choiceArr[randomLetter];
+    var randomNumber = Math.floor(Math.random() * choiceArr.length);
+    password = password + choiceArr[randomNumber];
+    console.log("Checking password", password)
   }
+  return password;
 }
 // Write password to the #password input
-function writePassword() {}
-  var correctPrompts = prompts();
-  if (correctPrompts) {
-    var newPassword = generatePassword();
-    var passwordText = document.querySelector("#password");
-    passwordText.value = newPassword;
+function writePassword() {
+  var newPassword = generatePassword();
+  var passwordText = document.querySelector("#password");
 
+  passwordText.value = newPassword;
 }
 
 
@@ -50,3 +51,5 @@ function prompts() {
   }
   return true;
 }
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
